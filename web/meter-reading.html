@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	  <title>Smart Meter</title>
+
+
+</head>
+<body class="">
+
+	<nav class="navbar navbar-expand-md navbar-dark my-nav">
+        <div class="">
+          <a class="navbar-brand" href="index.html">
+            
+          <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+          </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meters.html">Meters</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="current-load.html">Current Load</a>
+              </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="complaints.html">Complains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="owners.html">Owners</a>
+            </li>
+            <li class="nav-item">
+				<a class="nav-link" href="bill.html">Bill Viewer</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="bill-generator.html">Bill Generator</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="notification.html">Send Notification</a>
+			  </li>
+          </ul>
+          <div class="form-inline">
+            <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+          </div>
+        </div>
+        </div>
+	  </nav>
+	  
+	  	
+	  
+	  <div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="card shadow text-center mt-2">
+					<h1 class="grn-clr">Units comsumed</h1>
+						<nav class="nav nav-pills nav-fill bg-light  mt-2">
+		            <a class="nav-item nav-link show active" data-toggle="tab" id="active-nav" href="#daily-unit">Search Units consumed per day</a>
+		            <a class="nav-item nav-link show " data-toggle="tab" href="#monthly-unit">Search Units consumed per Month</a>
+		        </nav>
+				</div>
+			</div>	
+		</div>
+	</div>	
+        <div class="tab-content">
+        	<div id="daily-unit" class="tab-pane fade active show p-3 container-fluid container">
+                <div id="hotels-table" class="row">
+					<div class="col-md-12 col-xm-12 mb-5 pr-1">
+				
+						<div class="row justify-content-center">
+							<div class="col-12">
+								<div class="card shadow text-center mt-2 bg-light text-dark">
+									<span class="h5">Search Units consumed per day </span>
+									<form class="mt-2" id="meter_form">
+										<div class="form-group px-3 mb-2">
+											
+											<input type="text" class="form-control mb-3"  placeholder="meter number" id="meter-no-field">
+											
+											<select id="month-field" class="form-control mb-3">
+											<option value="1">January</option>
+											<option value="2">February</option>
+											<option value="3">March</option>
+											<option value="4">April</option>
+											<option value="5">May</option>
+											<option value="6">June</option>
+											<option value="7">July</option>
+											<option value="8">Auguest</option>
+											<option value="9">September</option>
+											<option value="10">October</option>
+											<option value="11">November</option>
+											<option value="12">December</option>
+											</select>
+											<select id="year-field" class="form-control mb-3">
+											<option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+											<option value="2021">2021</option>
+											<option value="2022">2022</option>
+											<option value="2023">2023</option>
+											<option value="2024">2024</option>
+											</select>
+											
+											<button type="submit" class="btn btn-success btn-block">Search</button>
+				
+										</div>
+									</form>	
+								</div>
+							</div>	
+						</div>
+							
+						<div class="container px-0">
+							<ul class="msg d-none list-group"></ul>
+						</div>
+					</div>
+                </div>
+            </div>
+        	<div id="monthly-unit" class="tab-pane fade  show p-3 container-fluid container">
+                <div id="homemade-table" class="row">
+					<div class="col-md-12 col-xs-12  pr-1">
+						<div class="row justify-content-center">
+								<div class="col-12">
+									<div class="card shadow text-center mt-2 bg-light text-dark">
+										<span class="h5">Search Units consumed per Month </span>
+					
+										<form class="mt-2" id="monthly_meter_form">
+											<div class="form-group px-2 mb-2">
+											<input type="text" class="form-control mb-3"  placeholder="meter number" id="monthly-meter-no-field">
+											
+											
+											<select id="monthly-year-field" class="form-control mb-3">
+												<option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+												<option value="2021">2021</option>
+												<option value="2022">2022</option>
+												<option value="2023">2023</option>
+												<option value="2024">2024</option>
+											</select>
+					
+											<button type="submit" class="btn btn-success btn-block">Search</button>
+					
+											
+											</div>
+										</form>
+										
+									</div>
+								</div>	
+							</div>
+					
+						<div class="container px-0">
+							<ul class="monthly-msg d-none list-group"></ul>
+						</div>
+					</div>
+                </div>
+            </div>
+
+
+	
+	<!-- <div class="container">
+		<div class="row">
+			<div class="col-md-6 col-xm-12 mb-5 pr-1">
+				
+				<div class="row justify-content-center">
+					<div class="col-12">
+						<div class="card shadow text-center mt-2 bg-light text-dark">
+							<span class="h5">Search Units consumed per day: </span>
+							<form class="mt-2" id="meter_form">
+								<div class="form-group px-3 mb-2">
+									
+									<input type="text" class="form-control mb-3"  placeholder="meter number" id="meter-no-field">
+									
+									<select id="month-field" class="form-control mb-3">
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">Auguest</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+									</select>
+									<select id="year-field" class="form-control mb-3">
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024">2024</option>
+									</select>
+									
+									<button type="submit" class="btn btn-success btn-block">Search</button>
+		
+								</div>
+							</form>	
+						</div>
+					</div>	
+				</div>
+					
+				<div class="container px-0">
+					<ul class="msg d-none list-group"></ul>
+				</div>
+			</div>
+			<div class="col-md-6 col-xs-12  pr-1">
+				<div class="row justify-content-center">
+						<div class="col-12">
+							<div class="card shadow text-center mt-2 bg-light text-dark">
+								<span class="h5">Search Units consumed per Month: </span>
+			
+								<form class="mt-2" id="monthly_meter_form">
+									<div class="form-group px-2 mb-2">
+									<input type="text" class="form-control mb-3"  placeholder="meter number" id="monthly-meter-no-field">
+									
+									
+									<select id="monthly-year-field" class="form-control mb-3">
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+									</select>
+			
+									<button type="submit" class="btn btn-success btn-block">Search</button>
+			
+									
+									</div>
+								</form>
+								
+							</div>
+						</div>	
+					</div>
+			
+				<div class="container px-0">
+					<ul class="monthly-msg d-none list-group"></ul>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+
+	
+	
+
+
+</body>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script src="common.js"></script>
+	<script type="text/javascript">
+
+		function filter(me){
+			string = $('#search-bar').val();
+			$('.data-card').hide();
+			$('.data-card:contains("'+string+'")').show();
+		}
+
+		// signout function
+		function singOut() {
+			if(confirm("Are you sure?")) {
+			firebase.auth().signOut();
+			window.location.href = "index.html";
+		    }
+		}
+
+		//authentication check
+		auth.onAuthStateChanged(function(user) {
+		if (!user) {  
+			window.location.href = "index.html";
+		}
+		});
+
+		let months    = ['January','February','March','April','May','June','July',
+						'August','September','October','November','December'];
+
+	
+		// DAILY UNITS READING
+		const meter_form = document.querySelector("#meter_form");
+
+		meter_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			let recordFound = false;
+			$( ".msg" ).html("");
+			let month = parseInt(meter_form['month-field'].value, 10);
+			let year = parseInt(meter_form['year-field'].value, 10);
+
+
+
+			if(meter_form['meter-no-field'].value === "") {
+				$( ".msg" ).append(`<li class="list-group-item bg-danger text-white">Meter number not provided</li>`);
+				$( ".msg" ).addClass('d-block');
+
+			}
+			else{
+				let units = 0;
+				db.collection('MeterReading').doc(meter_form['meter-no-field'].value).collection('name')
+				.where('month', '==', month).where('year', '==', year)
+				.onSnapshot(function(snapshots) {
+					$( ".msg" ).html("");
+
+					let readingPerday1 = 0;
+					let readingPerday2 = 0;
+					let readingPerday3 = 0;
+					let readingPerday4 = 0;
+					let readingPerday5 = 0;
+					let readingPerday6 = 0;
+					let readingPerday7 = 0;
+					let readingPerday8 = 0;
+					let readingPerday9 = 0;
+					let readingPerday10 = 0;
+					let readingPerday11 = 0;
+					let readingPerday12 = 0;
+					let readingPerday13 = 0;
+					let readingPerday14 = 0;
+					let readingPerday15 = 0;
+					let readingPerday16 = 0;
+					let readingPerday17 = 0;
+					let readingPerday18 = 0;
+					let readingPerday19 = 0;
+					let readingPerday20 = 0;
+					let readingPerday21 = 0;
+					let readingPerday22 = 0;
+					let readingPerday23 = 0;
+					let readingPerday24 = 0;
+					let readingPerday25 = 0;
+					let readingPerday26 = 0;
+					let readingPerday27 = 0;
+					let readingPerday28 = 0;
+					let readingPerday29 = 0;
+					let readingPerday30 = 0;
+					let readingPerday31 = 0;
+
+
+					if(snapshots.docs.length) {
+						
+						snapshots.docs.forEach(doc => {
+
+							if(doc.data().day == 1) {
+							  readingPerday1 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 2) {
+							  readingPerday2 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 3) {
+							  readingPerday3 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 4) {
+							  readingPerday4 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 5) {
+							  readingPerday5 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 6) {
+							  readingPerday6 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 7) {
+							  readingPerday7 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 8) {
+							  readingPerday8 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 9) {
+							  readingPerday9 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 10) {
+							  readingPerday10 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 11) {
+							  readingPerday11 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 12) {
+							  readingPerday12 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 13) {
+							  readingPerday13 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 14) {
+							  readingPerday14 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 15) {
+							  readingPerday15 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 16) {
+							  readingPerday16 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 17) {
+							  readingPerday17 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 18) {
+							  readingPerday18 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 19) {
+							  readingPerday19 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 20) {
+							  readingPerday20 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 21) {
+							  readingPerday21 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 22) {
+							  readingPerday22 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 23) {
+							  readingPerday23 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 24) {
+							  readingPerday24 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 25) {
+							  readingPerday25 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 26) {
+							  readingPerday26 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 27) {
+							  readingPerday27 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 28) {
+							  readingPerday28 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 29) {
+							  readingPerday29 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 30) {
+							  readingPerday30 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							if(doc.data().day == 31) {
+							  readingPerday31 = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							}
+							
+						});
+
+							
+														
+						$( ".msg" ).append(`
+						<li class="list-group-item h4"> 1/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday1 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 2/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday2 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 3/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday3 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 4/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday4 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 5/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday5 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 6/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday6 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 7/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday7 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 8/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday8 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 9/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday9 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 10/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday10 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 11/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday11 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 12/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday12 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 13/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday13 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 14/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday14 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 15/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday15 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 16/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday16 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 17/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday17 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 18/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday18 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 19/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday19 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 20/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday20 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 21/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday21 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 22/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday22 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 23/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday23 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 24/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday24 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 25/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday25 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 26/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday26 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 27/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday27 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 28/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday28 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 29/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday29 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 30/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday30 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4"> 31/${meter_form['month-field'].value}/${meter_form['year-field'].value}:  <strong class="float-right">${readingPerday31 * 0.0000002777777778} Units</strong> </li>
+						<li class="list-group-item h4 bg-dark text-white"> Total :  <strong class="float-right">${
+							(readingPerday1 * 0.0000002777777778) + (readingPerday2 * 0.0000002777777778) + (readingPerday3 * 0.0000002777777778) +
+							(readingPerday4 * 0.0000002777777778) + (readingPerday5 * 0.0000002777777778) + (readingPerday6 * 0.0000002777777778) +
+							(readingPerday7 * 0.0000002777777778) + (readingPerday8 * 0.0000002777777778) + (readingPerday9 * 0.0000002777777778) +
+							(readingPerday10 * 0.0000002777777778) + (readingPerday11 * 0.0000002777777778) + (readingPerday12 * 0.0000002777777778) +
+							(readingPerday13 * 0.0000002777777778) + (readingPerday14 * 0.0000002777777778) + (readingPerday15 * 0.0000002777777778) +
+							(readingPerday16 * 0.0000002777777778) + (readingPerday17 * 0.0000002777777778) + (readingPerday18 * 0.0000002777777778) +
+							(readingPerday19 * 0.0000002777777778) + (readingPerday20 * 0.0000002777777778) + (readingPerday21 * 0.0000002777777778) +
+							(readingPerday22 * 0.0000002777777778) + (readingPerday23 * 0.0000002777777778) + (readingPerday24 * 0.0000002777777778) +
+							(readingPerday25 * 0.0000002777777778) + (readingPerday26 * 0.0000002777777778) + (readingPerday27 * 0.0000002777777778) +
+							(readingPerday28 * 0.0000002777777778) + (readingPerday29 * 0.0000002777777778) + (readingPerday30 * 0.0000002777777778) +
+							(readingPerday30 * 0.0000002777777778) 
+						} Units</strong> </li>
+
+						`);
+						$('.msg').addClass('d-block');
+							
+
+					
+					}
+					else {
+						$( ".msg" ).append(`<li class="list-group-item bg-danger text-white">No Data Found</li>`);
+						$( ".msg" ).addClass('d-block');
+					}
+
+				});
+
+			}
+		});
+
+
+		// MONTHLY UNITS READING
+		const monthly_meter_form = document.querySelector("#monthly_meter_form");
+
+		monthly_meter_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			let recordFound = false;
+			$( ".monthly-msg" ).html("");
+			let year = parseInt(monthly_meter_form['monthly-year-field'].value, 10);
+
+
+
+			if(monthly_meter_form['monthly-meter-no-field'].value === "") {
+				$( ".monthly-msg" ).append(`<li class="list-group-item bg-danger text-white">Meter number not provided</li>`);
+				$( ".monthly-msg" ).addClass('d-block');
+
+			}
+			else{
+				let units = 0;
+				let totalSum =0;
+				let readingPerdoc1 = [];
+				let readingPerdoc2 = [];
+				let readingPerdoc3 = [];
+				let readingPerdoc4 = [];
+				let readingPerdoc5 = [];
+				let readingPerdoc6 = [];
+				let readingPerdoc7 = [];
+				let readingPerdoc8 = [];
+				let readingPerdoc9 = [];
+				let readingPerdoc10 = [];
+				let readingPerdoc11 = [];
+				let readingPerdoc12 = [];
+
+				// console.log("Meter no: " + monthly_meter_form['monthly-meter-no-field'].value);
+
+				db.collection('MeterReading').doc(monthly_meter_form['monthly-meter-no-field'].value).collection('name')
+				.where('year', '==', year)
+				.onSnapshot(function(snapshots) {
+					$( ".monthly-msg" ).html("");
+
+
+					if(snapshots.docs.length) {
+
+						
+						snapshots.docs.forEach(doc => {
+
+							if(doc.data().month == 1) {
+								readingPerdoc1.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 2) {
+								readingPerdoc2.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 3) {
+								readingPerdoc3.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 4) {
+								readingPerdoc4.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 5) {
+								readingPerdoc5.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 6) {
+								readingPerdoc6.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 7) {
+								readingPerdoc7.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 8) {
+								readingPerdoc8.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 9) {
+								readingPerdoc9.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 10) {
+								readingPerdoc10.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 11) {
+								readingPerdoc11.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							if(doc.data().month == 12) {
+								readingPerdoc12.push(doc.data().reading.reduce(function(a, b){ return a + b; }, 0));
+							}
+							
+
+
+							let sumofReadingsPerDocument = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+							let noOfUnitsPerDocument = sumofReadingsPerDocument * 0.0000002777777778;
+							totalSum += sumofReadingsPerDocument;
+							
+
+																			
+						});
+
+
+						$( ".monthly-msg" ).append(`
+						<li class="list-group-item h4"> Januery/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc1.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> Februry/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc2.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> March/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc3.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> April/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc4.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> May/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc5.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> June/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc6.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> July/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc7.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> August/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc8.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> September/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc9.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> October/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc10.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> November/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc11.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4"> December/${monthly_meter_form['monthly-year-field'].value}:  <strong class="float-right">${0.0000002777777778 * (readingPerdoc12.reduce(function(a, b){ return a + b; }, 0))} Units</strong> </li>
+						<li class="list-group-item h4 bg-dark text-white"> Total:  <strong class="float-right">${
+							(0.0000002777777778 * (readingPerdoc1.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc2.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc3.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc4.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc5.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc6.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc7.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc8.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc9.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc10.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc11.reduce(function(a, b){ return a + b; }, 0))) +
+							(0.0000002777777778 * (readingPerdoc12.reduce(function(a, b){ return a + b; }, 0)))
+						} Units</strong> </li>
+
+						`);
+						$('.monthly-msg').addClass('d-block');
+
+						
+
+					
+					}
+					else {
+						$( ".monthly-msg" ).append(`<li class="list-group-item bg-danger text-white">No Data Found</li>`);
+						$( ".monthly-msg" ).addClass('d-block');
+					}
+
+				});
+
+			}
+		});
+
+
+
+
+
+	
+                				 
+
+    </script>
+
+</html>

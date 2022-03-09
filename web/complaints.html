@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	  <title>Smart Meter</title>
+
+
+</head>
+<body class="bg-img">
+
+	<nav class="navbar navbar-expand-md navbar-dark my-nav">
+        <div class="">
+          <a class="navbar-brand" href="index.html">
+            
+          <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+          </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meters.html">Meters</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="current-load.html">Current Load</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="complaints.html">Complains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="owners.html">Owners</a>
+            </li>
+            <li class="nav-item">
+				<a class="nav-link" href="bill.html">Bill Viewer</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="bill-generator.html">Bill Generator</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="notification.html">Send Notification</a>
+			</li>
+          </ul>
+          <div class="form-inline">
+          <input class="form-control mr-sm-2" onkeyup="filter()"  id="search-bar" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light my-2 my-sm-0" onclick="filter()">Search</button>
+            <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+
+		<div class="container mt-5">
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<div class="card shadow text-center mt-2">
+						<h1 class="">Complaints</h1>
+							<nav class="nav nav-pills nav-fill bg-light  mt-2">
+						<a class="nav-item nav-link show active" data-toggle="tab" id="active-nav" href="#complaints-users">Users</a>
+					</nav>
+					</div>
+				</div>	
+			</div>
+		</div>
+		
+        <div class="tab-content">
+        	<div id="complaints-users" class="tab-pane fade active show p-3  container">
+                <div id="complaints-users-list" class="row">
+                </div>
+            </div>
+
+	 <!-- The Modal -->
+		<div class="modal fade" id="confirmation">
+		 <div class="modal-dialog">
+		    <div class="modal-content">
+		       <!-- Modal Header -->
+		       <div class="modal-header">
+		          <h4 class="modal-title" id="confirmation-message">Are you sure</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		       </div>
+		       <!--   <div class="modal-body">
+		          Modal body..
+		          </div>
+		          -->
+		       <!-- Modal footer -->
+		       <div class="modal-footer">
+		          <button id="confirmation-yes" type="button" class="btn pl-5 pr-5 btn-danger" data-dismiss="modal">Yes</button>
+		          <button id="confirmation-no" type="button" class="btn pl-5 pr-5 btn-default" data-dismiss="modal">No</button>
+		       </div>
+		    </div>
+		 </div>
+      </div>
+
+	<div class="loading-screen hide">
+
+         <h1 class="messageLoading">Loading</h1>
+         <div class="spinner-grow text-primary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-info" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-secondary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-light" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-secondary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-info" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+         <div class="spinner-grow text-primary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+    </div>	
+
+    <div id="snackbar">Some text some message..</div>
+
+</body>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script src="common.js"></script>
+	<script type="text/javascript">
+		db.collection('Complains').onSnapshot(function(snapshot) {
+
+		var data = "";
+		snapshot.forEach(function(childSnapshot) {
+		var object = childSnapshot.data();
+		var type = object.isSolved == "true"? "success" : "danger";
+
+		data += '<div id="'+childSnapshot.id+'" class="col-md-4 col-sm-6 data-card mb-3"> <div class="card h-100 shadow border-'+type+'"> <div class="card-header">'+object.complain_of+'</div><div class="card-body"> <p class="card-text">'+object.complain+'</p><p class="w-100 m-0 p-0"><a href="tel:'+object.contact+'">Phone: '+object.contact+'</a></p> </div><div class="card-footer color-white bg-'+type+' border-'+type+' "><span class="mb-0 h5 text-white"><b>'+(type=="success"?"Solved":"Unsolved")+'</b></span> <button class="btn btn-link text-white pb-0 pt-0 mt=0 mb-0" onclick="mark('+"'"+childSnapshot.id+"'"+','+"'"+type+"'"+')">Mark as '+(type=="success"?"unsolved":"solved")+'?</button></div> </div> </div>';
+
+		});
+		$("#complaints-users-list").html(data);
+		filter();
+		});
+
+		// Filter
+		function filter(me){
+            string = $('#search-bar').val();
+            $('.data-card').hide();
+            $('.data-card:contains("'+string+'")').show();
+		}
+		
+		 //authentication check
+		 auth.onAuthStateChanged(function(user) {
+			if (!user) {  
+			window.location.href = "index.html";
+			}
+		});
+
+				
+		function mark(id, type){
+			confirmation('Are you sure?', function(){
+				db.collection('Complains').doc(id).update({isSolved: type=="success"?"false":"true"});
+
+			});
+		}
+
+      </script>
+
+</html>

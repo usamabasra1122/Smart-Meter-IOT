@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	  <title>Smart Meter</title>
+
+
+</head>
+<body class="bg-img">
+
+	<nav class="navbar navbar-expand-md navbar-dark my-nav">
+        <div class="">
+          <a class="navbar-brand" href="index.html">
+            
+          <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+          </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meters.html">Meters</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="current-load.html">Current Load</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="complaints.html">Complains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="owners.html">Owners</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="bill.html">Bill Viewer</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="bill-generator.html">Bill Generator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="notification.html">Send Notification</a>
+            </li>
+          </ul>
+          <div class="form-inline">
+            <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+	<div class="text-center mt-5">
+		<h2 class="text-white">Bell Generator</h2>
+	</div>
+
+	 <div class="my-5"></div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="card shadow text-center mt-2">
+					<form class=" mt-2" id="monthly_meter_form">
+						<div class="form-group mx-sm-3 mb-2">
+						  <span class="h5">Genrate Bill: </span>
+						  <select id="monthly-month-field" class="form-control  mb-3">
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">Auguest</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						  </select>
+						  <select id="monthly-year-field" class="form-control  mb-3">
+							<option value="2019">2019</option>
+                            <option value="2020">2020</option>
+							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+						  </select>
+						  <input type="text" class="form-control  mb-3" id="unit-cost" placeholder="Enter cost per unit">
+						  <button type="submit" class="btn btn-success btn-block mb-3">Generate Bill</button>
+						</div>
+	
+						</div>
+					</form>
+					
+				</div>
+			</div>	
+		</div>
+	</div>	
+
+
+    <div class="bill"></div>
+
+	<div id="snackbar">Some text some message..</div>
+
+
+</body>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script src="common.js"></script>
+	<script src="jsPDF.js"></script>
+	<script type="text/javascript">
+
+
+		// signout function
+		function singOut() {
+			if(confirm("Are you sure?")) {
+			firebase.auth().signOut();
+			window.location.href = "index.html";
+		    }
+		}
+
+		//authentication check
+		auth.onAuthStateChanged(function(user) {
+		if (!user) {  
+			window.location.href = "index.html";
+		}
+		});
+
+	
+
+		function download() {
+			var doc = new jsPDF();
+			var elementHTML = $('.bill').html();
+			var specialElementHandlers = {
+				'#elementH' : function(element, rendered) {
+					return true;
+				}
+			};
+
+			doc.fromHTML(elementHTML, 15, 15, {
+				'width' : 170,
+				'elementHandlers' : specialElementHandlers
+			});
+
+			doc.save("bill.pdf");
+		}
+
+
+		// MONTHLY UNITS READING
+		const monthly_meter_form = document.querySelector("#monthly_meter_form");
+        let PDFArray = [];
+
+		monthly_meter_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			let recordFound = false;
+			let month = parseInt(monthly_meter_form['monthly-month-field'].value, 10);
+			let year = parseInt(monthly_meter_form['monthly-year-field'].value, 10);
+			let costPerUnit = parseInt(monthly_meter_form['unit-cost'].value, 10);
+			$( ".monthly-msg" ).html("");
+      let months    = ['January','February','March','April','May','June','July',
+						'August','September','October','November','December'];
+
+
+			if(!costPerUnit) {
+				SnackBar("Cost of unit is not provided");
+			}
+			else{
+                
+
+                db.collection('Meters').get()
+                .then((responce) => {
+                        if(responce) {
+                            
+                            responce.forEach(res => {
+                                let totalSum =0;
+                                
+                                
+                                db.collection('User').doc(res.data().user_cnic).get()
+                                .then((ref) => {
+
+                                    let dc = ref;
+   
+                               
+                                
+                                db.collection('MeterReading').doc(res.data().meter_no).collection('name')
+                                .where('year', '==', year)
+                                .where('month', '==', month)
+                                .onSnapshot(function(snapshots) {
+                                    $( ".monthly-msg" ).html("");
+
+
+
+                                    if(snapshots.docs.length) {
+
+                                        
+
+                                        snapshots.docs.forEach(doc => {
+
+                                           
+                                        	let sumofReadingsPerDoc = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+                                        	totalSum += sumofReadingsPerDoc;
+                                        	let noOfUnitsPerMonth = totalSum * 0.0000002777777778;
+
+                                                                                                                           
+                                        });
+
+                                        var doc = new jsPDF();
+
+                                        doc.setFontSize(24);
+                                        doc.text(75,20, "Smart Meter Fyp");
+                                        
+                                        doc.text(20,30, "--------------------------------------------------------------");
+
+                                        doc.setFontSize(22);
+                                        doc.text(20,50, "User Information");
+
+                                        doc.setFontSize(22);
+                                        doc.text(130,50, "Organization");
+
+                                        doc.setFontSize(15);
+                                        doc.text(20,60, `Name : ${dc.data().name}`);
+
+                                        doc.setFontSize(15);
+                                        doc.text(130,60, `Name : Pakistan Electricity`);
+
+                                        doc.setFontSize(15);
+                                        doc.text(20,70, `Contact number : ${dc.data().contact_number}`);
+
+                                        doc.setFontSize(15);
+                                        doc.text(130,70, `Contact number : 0445434543`);
+
+                                        doc.setFontSize(15);
+                                        doc.text(20,80, `Address : ${res.data().address}`);
+
+                                        doc.setFontSize(15);
+                                        doc.text(130,80, `Address : Islamabad`);
+
+                                        
+                                        doc.setFontSize(24);
+                                        doc.text(20,100, "--------------------------------------------------------------");
+
+                                        doc.setFontSize(12);
+                                        doc.text(20,110, `Unit consumed : ${totalSum * 0.0000002777777778}`);
+
+
+                                        doc.setFontSize(12);
+                                        doc.text(20,120, `Cost Per Unit : ${costPerUnit}`);
+
+                                        doc.setFontSize(12);
+                                        doc.text(20,130, `${months[month-1]}/${year}`);
+
+
+                                        doc.setFontSize(24);
+                                        doc.text(20,140, "--------------------------------------------------------------");
+
+                                        doc.setFontSize(18);
+                                        doc.text(105,150, `Bill : ${(totalSum * 0.0000002777777778) * costPerUnit} Rs`);
+                                        
+
+                                        let blob = new Blob([ doc.output('blob') ], { type : 'application/pdf'}); 
+                                       
+                                       
+                                        blob.lastModifiedDate = new Date();
+                                        blob.name = "test.pdf";
+                                      
+                                      
+
+                                        uplaodPDF(blob, res.data().meter_no, month, year);
+                                        
+                                    }
+                                    else {
+                                    }
+
+                                });
+
+                            });	
+
+                            });
+                        }
+                        else {
+                            SnackBar("No meters found");
+
+                        }
+                       
+                    
+                });
+	
+            }
+
+          
+        });
+        
+        function uplaodPDF(pdf, meter_no, month, year) {
+            var storage = firebase.storage();
+
+            // Create a storage reference from our storage service
+
+            
+            const ref = storage.ref().child('Bills/'+pdf+  1 + Math.floor((10000 - 1) * Math.random()));
+            const uploadTask =  ref.put(pdf);
+            SnackBar("PDF Uploaded");
+
+            db.collection('Bills').add({
+                meter_no : meter_no,
+                pdf : ref.fullPath,
+                month : month,
+                year : year
+            });
+
+            db.collection('NotificationForAll').add({
+                'notification' : "Your Bill has been generated"
+            })
+
+
+            
+        }
+
+           				 
+
+    </script>
+
+</html>

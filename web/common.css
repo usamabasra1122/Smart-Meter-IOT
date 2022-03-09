@@ -1,0 +1,226 @@
+body{
+  font-family: sans-serif;
+}
+/*
+  .bg-primary{
+    background: #ff3636 !important;
+  }
+  .primary{
+    color: #ff3636;
+
+  }
+  .secondary{
+    color: #BF0000;
+  }
+
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active{
+    background-color: #A70000 !important;
+    border-color: #A70000 !important;
+
+  }
+  .btn-primary{
+    background-color: #ff3636 !important;
+    border-color: #ff3636 !important;
+  }
+*/
+
+/*styles*/
+.c-pointer {
+    cursor: pointer;
+}
+.fz-0-8 {
+    font-size: 0.8em;
+}
+.fz-1-2 {
+    font-size: 1.2em;
+}
+.fz-2 {
+    font-size: 2em;
+}
+.fz-3 {
+    font-size: 3em;
+}
+.fz-4 {
+    font-size: 4em;
+}
+
+.fz-5 {
+    font-size: 5em;
+}
+
+.fz-120 {
+    font-size: 120%;
+}
+
+.cursive{
+    font-family: 'Comic Sans MS', cursive;
+}
+
+
+
+.degree-45{
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari 3-8 */
+    transform: rotate(45deg);
+}
+.degree-225{
+    -ms-transform: rotate(225deg); /* IE 9 */
+    -webkit-transform: rotate(225deg); /* Safari 3-8 */
+    transform: rotate(225deg);
+}
+
+/*Loading Screen*/
+
+.hide{
+  display: none;
+}
+
+.loading-screen {
+  position: fixed;
+  text-align: center;
+  padding: 15%; /* 15% from the top and centered */
+  background: #2e2e2eee;
+  z-index: 1050; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+}
+h1.messageLoading {
+  font-family: Futura, sans-serif;
+  color: #dfdfdf;
+}
+/*
+span.dot {
+  background: #aa7aa7;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 10px;
+  display: inline-block;
+  animation: infinite forwards 3s ease-in-out glow;
+}
+span.dot:nth-of-type(2) {
+  animation-delay: .5s;
+}
+span.dot:nth-of-type(3) {
+  animation-delay: 1s;
+}*/
+/*
+@keyframes glow {
+  20% {
+    background: #ffefed;
+  }
+  50% {
+    background: slategrey;
+    transform: scale(1.2) translate3D(0, -5px, 0);
+  }
+  80% {
+    background: dodgerblue;
+  }
+}*/
+
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+
+    transform: translate(-50%, 0);
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1050; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: snackin 0.5s, snackout 0.5s 2.5s;
+    animation: snackin 0.5s, snackout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes snackin {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes snackin {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes snackout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes snackout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+
+.star-ratings-sprite {
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
+    repeat-x;
+  font-size: 0;
+  height: 21px;
+  line-height: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  width: 110px;
+  margin: 0 auto;
+
+  
+}
+.star-ratings-sprite-rating {
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png")
+      repeat-x;
+    background-position: 0 100%;
+    float: left;
+    height: 21px;
+    display: block;
+  }
+
+.my-nav{
+  background-color: #303e36 !important;
+}
+
+.grn-clr{
+  color: #1cbd62 !important;
+}
+
+
+.bg-img{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('bg.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	<title>Smart Meter</title>
+
+
+</head>
+<body class="bg-img">
+
+      <nav class="navbar navbar-expand-md navbar-dark my-nav">
+        <div class="">
+          <a class="navbar-brand" href="index.html">
+            
+          <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+          </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meters.html">Meters</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="current-load.html">Current Load</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="complaints.html">Complains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="owners.html">Owners</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bill.html">Bill Viewer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bill-generator.html">Bill Generator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="notification.html">Send Notification</a>
+            </li>
+          </ul>
+          <div class="form-inline">
+          <input class="form-control mr-sm-2" onkeyup="filter()"  id="search-bar" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light my-2 my-sm-0" onclick="filter()">Search</button>
+            <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+          </div>
+        </div>
+        </div>
+      </nav>
+  
+      <div class="container py-5">
+        <div class="row">
+         
+          <div class="col-md-12">
+            <div class="card card-default">
+              <div class="card-header bd-light">
+                <h3 class="float-left count"></h3>
+                <i data-toggle="modal" data-target="#add-user-modal" class="fa float-right fa-3x mr-2 mt-1 fa-plus-circle"></i>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                <table class="table ">
+                  <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>CNIC</th>
+                        <th>Phone number</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                  </thead>
+                  <tbody class="user-list">
+                    
+                  </tbody> 
+                  </table>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+<!-- Add user Modal -->
+<div class="modal fade" id="add-user-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form id="user_form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter name" id="name-field">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Email" id="email-field">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Address" id="address-field">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter CNIC" id="cnic-field">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Contact number" id="contact-field">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick="addUser()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit user modal -->
+<div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger alert-dismissible fade edit-alert" role="alert">
+          <strong>Please enter valid data.</strong>
+          </button>
+        </div>
+        <form id="edit_form">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter name" id="name-edit">
+          </div>
+          <div class="form-group">
+            <input type="hidden" class="form-control" placeholder="Enter Email" id="email-edit">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Address" id="address-edit">
+          </div>
+          <div class="form-group">
+            <input type="hidden" class="form-control" placeholder="Enter CNIC" id="cnic-edit">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Contact number" id="contact-edit">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick="editUser()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification modal -->
+<div class="modal fade" id="notification-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Send Notification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="notification_form">
+          <div class="form-group">
+            <input type="text" class="form-control"  disabled placeholder="Enter CNIC" id="notice-cnic">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Notice" id="notice-field">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" onclick="addNotification()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="snackbar">Some text some message..</div>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script src="common.js"></script>
+  <script type="text/javascript">
+
+    // signout function
+    function singOut() {
+
+      if(confirm("Are you sure?")) {
+        firebase.auth().signOut();
+        window.location.href = "index.html";
+      }
+      
+    }
+
+    //authentication check
+    auth.onAuthStateChanged(function(user) {
+        if (!user) {  
+        
+              window.location.href = "index.html";
+   
+        }
+      });
+  
+
+    // add new user
+    const user_form = document.querySelector("#user_form");
+    function addUser() {
+
+      let email = user_form['email-field'].value;
+      let name = user_form['name-field'].value;
+      let contact = user_form['contact-field'].value;
+      let cnic = user_form['cnic-field'].value;
+      let address = user_form['address-field'].value;
+      let password = '12345678';
+
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+
+      if(email === "" || name === "" || contact === "" || cnic === "" || address === "") {
+        SnackBar("Fields cant be empty!");
+      }
+      else if(cnic.length != 13) {
+        SnackBar("Cnic is not 13 character long!");
+      }
+      else if(!(email.match(mailformat)))
+      {
+        SnackBar("Please Enter a valid email!");
+
+      }
+      else{
+
+        db.collection('User').doc(user_form['cnic-field'].value).get()
+        .then((doc) => {
+          if(doc.exists) {
+            SnackBar("User having a similer id already exist!");
+          }
+          else {
+            db.collection('User').doc(user_form['cnic-field'].value).set({
+            name :    user_form['name-field'].value,
+            email :    user_form['email-field'].value,
+            contact_number :    user_form['contact-field'].value,
+            cnic :    user_form['cnic-field'].value,
+            address :    user_form['address-field'].value,
+            }).then(() => {
+                user_form.reset();
+                $('#add-user-modal').modal('hide');
+                auth.createUserWithEmailAndPassword(email, password)
+                .then(user => {
+                  
+                })
+                .catch(e => {
+                  console.log(e.message);
+                });
+            }).catch((err) => {
+                console.log(err.message);
+            });
+          }
+        });
+
+      }
+      
+
+      
+
+        
+    }
+
+
+
+    // Show user
+    db.collection('User').onSnapshot((snapshot) => {
+        renderUsers(snapshot.docs);
+        $(".count").html(`Users: ${snapshot.docs.length}`);
+    });
+
+    const userList = document.querySelector('.user-list');
+
+    const renderUsers = (docs) => {
+      
+      if(docs.length) {
+        let hmtl = ``;
+
+        docs.forEach(doc => {
+          let tr = `
+            <tr class="data-card" id="${doc.id}">
+              <td>${doc.data().name}</td>
+              <td>${doc.data().cnic}</td>
+              <td>${doc.data().contact_number}</td>
+              <td>${doc.data().address}</td>
+              <td>${doc.data().email}</td>
+              <td><button class="btn btn-sm btn-success editBtn" onclick="showEditModal('${doc.id}')">Edit</button></td>
+              <td><button class="btn btn-sm btn-danger" onclick="deleteUser('${doc.id}')">Delete</button></td> 
+              <td><button class="btn btn-sm btn-dark" onclick="showNotificationModal('${doc.id}')">Send Notification</button></td> 
+            </tr>
+          `;
+      
+          hmtl += tr;
+      
+        });
+
+      
+        userList.innerHTML = hmtl;
+      }
+      else {
+        userList.innerHTML = `<h5 class="center-align"> No User to show </h5>`;
+      }
+    };
+
+    // DELETEING A USER
+    function deleteUser(id) {
+
+    if(confirm("Are you sure?")) {
+      db.collection('User').doc(id).delete();
+    }
+      
+     
+    }
+
+     // SHOW NOTIFICATION MODAL
+     function showNotificationModal(id) {
+          db.collection('User').doc(id).get()
+            .then((doc) => {
+                $('#notice-cnic').val(doc.data().cnic);              
+            });
+          
+          $('#notification-modal').modal('show');
+    }
+
+    // EDITING
+    function showEditModal(id) {
+
+        db.collection('User').doc(id).get()
+        .then((doc) => {
+            $('#name-edit').val(doc.data().name);
+            $('#email-edit').val(doc.data().email);
+            $('#contact-edit').val(doc.data().contact_number);
+            $('#address-edit').val(doc.data().address);
+            $('#cnic-edit').val(doc.data().cnic);
+        });
+           
+
+            $('#edit-user-modal').modal('show');
+
+    }
+
+    function editUser() {
+      let name = edit_form['name-edit'].value;
+      let contact = edit_form['contact-edit'].value;
+      let cnic = edit_form['cnic-edit'].value;
+      let address = edit_form['address-edit'].value;
+
+      if(name === "" || contact === "" || cnic === "" || address === "") {
+        SnackBar("Fields cant be empty!");
+      }
+    
+      else{
+        db.collection('User').doc(edit_form['cnic-edit'].value).update({
+            name :    edit_form['name-edit'].value,
+            contact_number :    edit_form['contact-edit'].value,
+            cnic :    edit_form['cnic-edit'].value,
+            address :    edit_form['address-edit'].value,
+            
+        }).then(() => {
+            edit_form.reset();
+            $('#edit-user-modal').modal('hide');
+            
+        }).catch((err) => {
+            console.log(err.message);
+        });
+      }
+    }
+
+    function addNotification() {
+      db.collection('Notifications').add({
+          cnic :    notification_form['notice-cnic'].value,    
+          notice : notification_form['notice-field'].value
+      }).then(() => {
+          notification_form.reset();
+          $('#notification-modal').modal('hide');
+          
+      }).catch((err) => {
+          console.log(err.message);
+      });
+    }
+
+   // FILTER
+   function filter(me){
+      string = $('#search-bar').val();
+      $('.data-card').hide();
+      $('.data-card:contains("'+string+'")').show();
+  }
+
+
+  </script>
+</body>
+
+</html>

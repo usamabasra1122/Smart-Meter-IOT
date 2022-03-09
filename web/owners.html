@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	<title>Smart Meter</title>
+
+
+</head>
+<body class="bg-img">
+
+  <nav class="navbar navbar-expand-md navbar-dark my-nav">
+    <div class="">
+      <a class="navbar-brand" href="index.html">
+        
+      <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+      </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="meters.html">Meters</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="current-load.html">Current Load</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="complaints.html">Complains</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="owners.html">Owners</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bill.html">Bill Viewer</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="bill-generator.html">Bill Generator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="notification.html">Send Notification</a>
+        </li>
+      </ul>
+      <div class="form-inline">
+      <input class="form-control mr-sm-2" onkeyup="filter()"  id="search-bar" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" onclick="filter()">Search</button>
+        <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+      </div>
+    </div>
+    </div>
+  </nav>
+  
+
+      <div class="container py-5">
+        <div class="row">
+         
+          <div class="col-md-12">
+            <div class="card card-default">
+              <div class="card-header bd-light">
+                <h3 class="float-left">Meter Owners</h3>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                        <th>Owner name</th>
+                        <th>Owner CNIC</th>
+                        <th>Contact Number</th>
+                        <th>Address</th>
+                        <th>Meter Number</th>
+                        <th>Meter Type</th>
+                    </tr>
+                  </thead>
+                  <tbody class="meter-list">
+                    
+                  </tbody> 
+                  </table>
+                  </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script src="common.js"></script>
+  <script type="text/javascript">
+
+    // signout function
+    function singOut() {
+
+      if(confirm("Are you sure?")) {
+        firebase.auth().signOut();
+        window.location.href = "index.html";
+      }
+      
+    }
+
+    //authentication check
+    auth.onAuthStateChanged(function(user) {
+        if (!user) {  
+        
+              window.location.href = "index.html";
+   
+        }
+      });
+  
+
+
+    // Show user
+    db.collection('Meters').onSnapshot((snapshot) => {
+      
+        renderMeters(snapshot.docs);
+    });
+
+    const meterList = document.querySelector('.meter-list');
+
+    const renderMeters = (docs) => {
+      
+      if(docs.length) {
+        let hmtl = ``;
+       
+       
+
+        docs.forEach(doc => {
+
+          db.collection('User').doc(doc.data().user_cnic).get()
+          .then(function (res) {
+
+            let tr = `
+                  <tr class="w-100 data-card" id="${doc.id}">
+                    <td>${res.data().name}</td>
+                    <td>${doc.data().user_cnic}</td>
+                    <td>${res.data().contact_number}</td>
+                    <td>${doc.data().address}</td>
+                    <td>${doc.data().meter_no}</td>
+                    <td>${doc.data().type}</td>
+                  </tr>
+                `;
+            hmtl += tr;
+            
+            meterList.innerHTML = hmtl; 
+
+          });
+
+               
+      
+        });
+
+      
+
+       
+      }
+      else {
+        meterList.innerHTML = `<h5 class="center-align"> No Meter owners to show </h5>`;
+      }
+    };
+
+    function getUser(cnic) {
+    
+
+
+    }
+
+
+   // FILTER
+   function filter(me){
+      string = $('#search-bar').val();
+      $('.data-card').hide();
+      $('.data-card:contains("'+string+'")').show();
+  }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	  <title>Smart Meter</title>
+
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark my-nav">
+        <div class="">
+          <a class="navbar-brand" href="index.html">
+            
+          <span style="color: #fff;" class="ml-2">Smart Meter</span> 
+          </a>
+  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="users.html">Users <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meters.html">Meters</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="current-load.html">Current Load</a>
+              </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="meter-reading.html">Meter Reading</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="complaints.html">Complains</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="owners.html">Owners</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bill.html">Bill Generator</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="bill-generator.html">Bill Generator</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="notification.html">Send Notification</a>
+			</li>
+          </ul>
+          <div class="form-inline">
+            <button onclick="singOut()" data-aos="fade-down" data-aos-duration="1000" class="btn ml-1 btn-outline-danger nav-item">Log out</button>
+          </div>
+        </div>
+        </div>
+	  </nav>
+	  
+	  <div class="text-center mt-5">
+		<h2>Units Consumed</h2>
+	  </div>	
+
+	
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="card shadow text-center mt-2">
+					<form class="form-inline mt-2" id="meter_form">
+						<div class="form-group mx-sm-3 mb-2">
+						  <span class="h5">Search Units consumed per day: </span>
+						  <input type="text" class="form-control ml-2"  placeholder="meter number" id="meter-no-field">
+						  <select id="day-field" class="form-control mx-3">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						  </select>
+						  <select id="month-field" class="form-control">
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">Auguest</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						  </select>
+						  <select id="year-field" class="form-control mx-3">
+							<option value="2020">2020</option>
+							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+						  </select>
+						</div>
+						<button type="submit" class="btn btn-success mb-2 float-right">Search</button>
+
+						</div>
+					</form>
+					
+				</div>
+			</div>	
+		</div>
+	</div>	
+
+	<div class="container my-5">
+		<h2 class="msg d-none"></h2>
+	</div>
+
+	<div class="my-5"></div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="card shadow text-center mt-2">
+					<form class="form-inline mt-2" id="monthly_meter_form">
+						<div class="form-group mx-sm-3 mb-2">
+						  <span class="h5">Search Units consumed per month: </span>
+						  <input type="text" class="form-control ml-2"  placeholder="meter number" id="monthly-meter-no-field">
+						  <select id="monthly-month-field" class="form-control">
+							<option value="1">January</option>
+							<option value="2">February</option>
+							<option value="3">March</option>
+							<option value="4">April</option>
+							<option value="5">May</option>
+							<option value="6">June</option>
+							<option value="7">July</option>
+							<option value="8">Auguest</option>
+							<option value="9">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						  </select>
+						  <select id="monthly-year-field" class="form-control mx-3">
+							<option value="2020">2020</option>
+							<option value="2021">2021</option>
+							<option value="2022">2022</option>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+						  </select>
+						</div>
+						<button type="submit" class="btn btn-success mb-2 float-right">Search</button>
+
+						</div>
+					</form>
+					
+				</div>
+			</div>	
+		</div>
+	</div>	
+
+	<div class="container mt-3">
+		<h2 class="monthly-msg d-none"></h2>
+	</div>
+
+
+</body>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script src="common.js"></script>
+	<script type="text/javascript">
+
+		function filter(me){
+			string = $('#search-bar').val();
+			$('.data-card').hide();
+			$('.data-card:contains("'+string+'")').show();
+		}
+
+		// signout function
+		function singOut() {
+			if(confirm("Are you sure?")) {
+			firebase.auth().signOut();
+			window.location.href = "index.html";
+		    }
+		}
+
+		//authentication check
+		auth.onAuthStateChanged(function(user) {
+		if (!user) {  
+			window.location.href = "index.html";
+		}
+		});
+
+		let months    = ['January','February','March','April','May','June','July',
+						'August','September','October','November','December'];
+
+	
+		// DAILY UNITS READING
+		const meter_form = document.querySelector("#meter_form");
+
+		meter_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			let recordFound = false;
+			$( ".msg" ).html("");
+
+
+			if(meter_form['meter-no-field'].value === "") {
+				$( ".msg" ).append(`Meter number not provided`);
+				$( ".msg" ).addClass('d-block');
+
+			}
+			else{
+				let units = 0;
+				db.collection('MeterReading').doc(meter_form['meter-no-field'].value).collection('name').onSnapshot(function(snapshots) {
+					$( ".msg" ).html("");
+
+					if(snapshots.docs.length) {
+						
+						snapshots.docs.forEach(doc => {
+
+							if(doc.data().day == meter_form['day-field'].value 
+							&& doc.data().month == meter_form['month-field'].value
+							&& doc.data().year == meter_form['year-field'].value) 
+							{
+								let sumofReadings = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+								let noOfUnits = sumofReadings * 0.0000002777777778;
+								units = noOfUnits;
+								
+								
+								$( ".msg" ).append( `Total Units consumed on ${meter_form['day-field'].value}/${meter_form['month-field'].value}/${meter_form['year-field'].value} are ${sumofReadings} Units` );
+								$('.msg').addClass('d-block');
+								
+								recordFound = true;
+							}
+							
+						});
+
+						
+						if(recordFound == false) {
+							$( ".msg" ).append( `No record found` );
+							$('.msg').addClass('d-block');
+						}
+					}
+					else {
+						$( ".msg" ).append(`Meter number not found`);
+						$( ".msg" ).addClass('d-block');
+					}
+
+				});
+
+			}
+		});
+
+
+		// DAILY UNITS READING
+		const monthly_meter_form = document.querySelector("#monthly_meter_form");
+
+		monthly_meter_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			let recordFound = false;
+			$( ".monthly-msg" ).html("");
+
+
+			if(monthly_meter_form['monthly-meter-no-field'].value === "") {
+				$( ".monthly-msg" ).append(`Meter number not provided`);
+				$( ".monthly-msg" ).addClass('d-block');
+
+			}
+			else{
+				let totalSum =0;
+				db.collection('MeterReading').doc(monthly_meter_form['monthly-meter-no-field'].value).collection('name').onSnapshot(function(snapshots) {
+					$( ".monthly-msg" ).html("");
+
+					if(snapshots.docs.length) {
+						
+						snapshots.docs.forEach(doc => {
+
+							if( doc.data().month == monthly_meter_form['monthly-month-field'].value
+								&& doc.data().year == monthly_meter_form['monthly-year-field'].value) 
+							{
+								let sumofReadingsofOneArray = doc.data().reading.reduce(function(a, b){ return a + b; }, 0);
+								totalSum += sumofReadingsofOneArray;
+								
+								
+								recordFound = true;
+							}
+							
+						});
+
+						if(totalSum !=0) {
+							let noOfUnits = totalSum * 0.0000002777777778;
+							$( ".monthly-msg" ).append( `Total Units consumed on ${months[monthly_meter_form['monthly-month-field'].value-1]}/${monthly_meter_form['monthly-year-field'].value} are ${noOfUnits} Units` );
+							$('.monthly-msg').addClass('d-block');
+						}
+
+						if(recordFound == false) {
+							$( ".monthly-msg" ).append( `No record found` );
+							$('.monthly-msg').addClass('d-block');
+						}
+					}
+					else {
+						$( ".monthly-msg" ).append(`Meter number not found`);
+						$( ".monthly-msg" ).addClass('d-block');
+					}
+
+				});
+
+			}
+		});
+
+
+
+
+	
+                				 
+
+    </script>
+
+</html>

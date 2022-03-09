@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      <link rel="stylesheet" href="common.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800,800i&display=swap" rel="stylesheet"> 
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+	<title>Smart Meter</title>
+
+
+</head>
+<body class="bg-img">
+
+	<nav class="navbar navbar-expand-md navbar-dark my-nav pb-3">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">
+			   <span style="color: #fff;" >Smart Meter</span> 
+			  </a>
+		</div>
+	</nav>
+
+	<div class="row">
+		<div class=" col-4  mx-auto">
+			<div class="card shadow m-4 p-4 ">
+				<h2 class="mb-4 text-center">Smart Meter Admin Panel</h2>
+				<form name="signin">
+				  <div class="form-group">
+				    <label for="email">Email address</label>
+				    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="email@address.com">
+				  </div>
+				  <div class="form-group">
+				    <label for="password">Password</label>
+				    <input type="password" class="form-control" id="password" placeholder="Password">
+				  </div>
+				  <button type="submit" class="btn text-white btn-block my-nav mt-3">Sign In</button>
+				</form>
+				<button class="btn btn-link" data-toggle="modal" data-target="#forgot-password">Forgot your password?</button>
+			</div>
+    	</div>
+	</div>
+
+
+	<div class="modal fade" id="forgot-password">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+		       <div class="modal-header">
+					<h4 class="modal-title">Lost your password?</h4>
+			</div>
+			<!-- <div class="modal-body">
+		          </div> -->
+			<div class="model-footer p-2">
+					<p>Please enter your email address. You will receive a link to create a new password.</p>
+				<form name="forgot-password">
+                       <div class="form-group">
+					    <label for="reset-email">Email address</label>
+					    <input type="reset-email" class="form-control" id="reset-email" aria-describedby="emailHelp" placeholder="email@address.com">
+					  </div>
+                             
+                           <div class="text-right">
+                              <input type="submit" name="forgot-password-btn" class="btn btn-secondary" value="Reset Password">
+                           </div>
+                        </form>
+			</div>
+                        
+                    </div>
+                </div>
+      </div>
+
+
+	 <!-- The Modal -->
+		<div class="modal fade" id="confirmation">
+		 <div class="modal-dialog">
+		    <div class="modal-content">
+		       <!-- Modal Header -->
+		       <div class="modal-header">
+		          <h4 class="modal-title" id="confirmation-message">Are you sure</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		       </div>
+		       <!--   <div class="modal-body">
+		          Modal body..
+		          </div>
+		          -->
+		       <!-- Modal footer -->
+		       <div class="modal-footer">
+		          <button id="confirmation-yes" type="button" class="btn pl-5 pr-5 btn-danger" data-dismiss="modal">Yes</button>
+		          <button id="confirmation-no" type="button" class="btn pl-5 pr-5 btn-default" data-dismiss="modal">No</button>
+		       </div>
+		    </div>
+		 </div>
+      </div>
+
+	
+	<div class="loading-screen hide">
+
+         <h1 class="messageLoading">Loading</h1>
+         <div class="spinner-grow text-primary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-info" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-secondary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-light" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-secondary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+		<div class="spinner-grow text-info" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+         <div class="spinner-grow text-primary" role="status">
+		  <span class="sr-only">Loading...</span>
+		</div>
+    </div>	
+
+    <div id="snackbar">Some text some message..</div>
+
+</body>
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script src="common.js"></script>
+	<script type="text/javascript">
+
+		$('form[name="signin"]').submit(function (event) {
+				event.preventDefault();
+				email = $('#email').val();
+				password = $('#password').val();
+				
+				if(email === "aliijaz3232@gmail.com") {
+					ShowLoading("Logging in");
+					
+					auth.signInWithEmailAndPassword(email, password)
+						.then(user => {
+							DismissLoading();
+							trigger_click(".close");
+						})
+						.catch(e => {
+							DismissLoading();
+							SnackBar(e.message);
+						});
+				}
+				else {
+					SnackBar("Invalid admin email.");
+				}
+			});
+
+
+           auth.onAuthStateChanged(function(user) {
+
+				if (user) {  
+					db.collection('Admin').onSnapshot((snapshot) => {
+						if(snapshot.docs) {
+							// console.log(doc.val());
+							SnackBar("You are logged in.");
+							window.location.href = "users.html";
+						}
+						else {
+							firebase.auth().signOut().then(function() {
+							SnackBar("Invalid User.");
+							console.log(123);
+							}).catch(function(error) {
+							SnackBar("Unexpected error occured.");
+							});
+						}
+					});
+						
+
+				}
+		 });
+		 
+
+		
+
+      </script>
+
+</html>
